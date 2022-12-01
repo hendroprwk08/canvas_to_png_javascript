@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas dengan Image to PNG download</title>
+</head>
+<body onload="draw()">
+    <p style="margin: 5px 5px 20px 0px;" >Right click, then "same image as..." and for smartphone users long press image below to download</p>
+    
+    <canvas id="myCanvas" width="2000" height="1415" style="border:1px solid #000;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    
+    <script>
+        function draw()
+        {
+            var canvas = document.getElementById("myCanvas");          
+            var ctx = canvas.getContext("2d");
+            
+            //background image
+            var background = new Image();
+            background.src = "img.png";
+             
+            // Make sure the image is loaded first otherwise nothing will draw.
+            background.onload = function(){
+                ctx.drawImage(background, 0, 0);   
+
+                ctx.fillStyle = "yellow";
+                ctx.font = "30px Arial";
+                ctx.fillText("Hello World", 10, 50);
+
+                ctx.fillStyle = "yellow";
+                ctx.font = "30px Arial";
+                ctx.fillText("Hello World", 10, 50);
+
+                ctx.fillStyle = "red";
+                ctx.font = "50px Verdana";
+                ctx.fillText("Hello World", 10, 130);
+
+                //text center
+                ctx.font = "900 50px Times New Roman";
+                ctx.fillStyle = "blue";
+                ctx.textAlign = "center";
+                ctx.fillText("Hello World", canvas.width/2, canvas.height/2);
+            }
+        }
+        
+        function download() {
+             var canvas = document.getElementById("myCanvas");  
+            //line
+            var link = document.getElementById('link');
+            link.setAttribute('download', 'sertifikat.png');
+            link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+            link.click();
+        }
+    </script>
+</body>
+</html>
